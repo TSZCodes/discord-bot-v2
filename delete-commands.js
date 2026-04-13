@@ -18,7 +18,9 @@ const rest = new REST().setToken(token);
       return;
     }
 
-    console.log(`Found ${commands.length} commands. Deleting them individually...`);
+    console.log(
+      `Found ${commands.length} commands. Deleting them individually...`,
+    );
 
     // 2. Loop through and delete each one by its specific ID
     for (const command of commands) {
