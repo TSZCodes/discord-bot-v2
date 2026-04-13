@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const keepAlive = require('./keep_alive.js');
 require('dotenv').config();
 const token = process.env.BOT_TOKEN;
 
@@ -43,5 +44,7 @@ for (const file of eventFiles) {
     client.on(event.name, (...args) => event.execute(...args));
   }
 }
+
+keepAlive();
 
 client.login(token);
