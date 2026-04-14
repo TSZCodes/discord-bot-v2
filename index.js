@@ -1,12 +1,18 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const keepAlive = require('./keep_alive.js');
+const {
+  Client,
+  Collection,
+  GatewayIntentBits,
+  Activity,
+  ActivityType,
+} = require('discord.js');
 require('dotenv').config();
 const token = process.env.BOT_TOKEN;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+// Slash Command Handler
 client['commands'] = new Collection();
 
 const foldersPath = path.join(__dirname, 'commands');
@@ -30,6 +36,7 @@ for (const folder of commandFolders) {
   }
 }
 
+// Event Handler
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs
   .readdirSync(eventsPath)
@@ -45,6 +52,17 @@ for (const file of eventFiles) {
   }
 }
 
-keepAlive();
+// Status
+client.on('clientReady', () => {
+  client.user.setPresence({
+    status: 'online',
+    activities: [
+      {
+        type: ActivityType.Playing,
+        name: 'Worst Bots 2026',
+      },
+    ],
+  });
+});
 
 client.login(token);

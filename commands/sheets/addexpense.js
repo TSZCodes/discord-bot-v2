@@ -1,7 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
 const axios = require('axios').default;
-require('dotenv').config();
-const url = process.env.sheetsURL;
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -25,6 +23,7 @@ module.exports = {
 
   async execute(interaction) {
     await interaction.deferReply();
+    const url = process.env.sheetsURL;
     const expense = interaction.options.getString('expense');
     const nominal = interaction.options.getString('nominal');
     const date = interaction.options.getString('date');
