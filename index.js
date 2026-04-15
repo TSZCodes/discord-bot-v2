@@ -4,7 +4,6 @@ const {
   Client,
   Collection,
   GatewayIntentBits,
-  Activity,
   ActivityType,
 } = require('discord.js');
 require('dotenv').config();
